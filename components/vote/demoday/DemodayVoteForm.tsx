@@ -28,7 +28,7 @@ export default function DemodayVoteForm() {
     };
     
     return (
-        <div className="flex flex-col items-center justify-center gap-4">
+        <div className="flex flex-col items-center justify-center gap-4 pl-">
             <div className="grid grid-cols-6 gap-y-4 gap-x-8">
                 {teams.map((team, index) => (
                     <div 
@@ -47,7 +47,7 @@ export default function DemodayVoteForm() {
                 ))}
             </div>
 
-            <div className="flex items-center justify-center w-30 h-15 rounded-lg bg-primary text-white text-xl font-bold cursor-pointer">투표 완료</div>
+            <button className="flex items-center justify-center w-30 h-15 rounded-lg bg-primary text-white text-xl font-bold cursor-pointer">투표 완료</button>
         </div>
     )
 }
