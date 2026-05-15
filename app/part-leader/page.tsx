@@ -9,7 +9,7 @@ export default function DemodayVote() {
       </div>
       <PartLeaderVoteForm />
       <Link
-        href="/part-leader-result"
+        href="part-leader/result"
         className="ml-4 text-lg text-gray-500 hover:text-gray-700"
       >
         프론트파트장결과page 확인용
