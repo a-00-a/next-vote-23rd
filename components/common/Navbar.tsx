@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import Logo from "@/public/logo-ceos.svg";
-import NavItem from "./NavItem";
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import Logo from '@/public/logo-ceos.svg';
+import NavItem from './NavItem';
 
 // ─── 타입 ────────────────────────────────────────────────────────────────────
 
@@ -16,16 +16,16 @@ interface User {
 // ─── 더미 데이터 (로그인 구현 시 useAuthStore로 교체) ─────────────────────────
 
 const MOCK_USER: User = {
-  name: "최민주",
-  team: "바리바리",
-  part: "FE",
+  name: '최민주',
+  team: '바리바리',
+  part: 'FE',
 };
 
 // ─── 메뉴 항목 ────────────────────────────────────────────────────────────────
 
 const NAV_ITEMS = [
-  { label: "파트장\n투표", href: "/vote/part-leader" },
-  { label: "데모데이\n투표", href: "/vote/demoday" },
+  { label: '파트장\n투표', href: '/part-leader' },
+  { label: '데모데이\n투표', href: '/demoday' },
 ];
 
 // ─── 컴포넌트 ─────────────────────────────────────────────────────────────────
@@ -45,7 +45,7 @@ export default function Navbar() {
       </div>
 
       {/* 구분선 */}
-      <div className="mx-1 border-t-[3px] border-blue" />
+      <div className="mx-1 border-t-[3px] border-primary" />
 
       {/* 로그인 후: 사용자 정보 + 로그아웃 */}
       {user ? (
@@ -70,9 +70,9 @@ export default function Navbar() {
           href="/login"
           className={`w-full flex justify-center items-center
       ${
-        pathname === "/login"
-          ? "bg-blue text-white"
-          : "bg-white text-blue hover:bg-blue-900/10"
+        pathname === '/login'
+          ? 'bg-primary text-white'
+          : 'bg-white text-primary hover:bg-blue-900/10'
       }`}
         >
           <div className="text-2xl font-extrabold text-center px-[57px] py-[125px]">

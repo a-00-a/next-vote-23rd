@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import Link from "next/link";
+import Link from 'next/link';
 
 interface NavItemProps {
   label: string;
@@ -16,11 +16,11 @@ export default function NavItem({
   disabled,
 }: NavItemProps) {
   const baseClass =
-    "w-[186px] h-[146px] flex justify-center items-center px-4 py-7 text-2xl font-normal text-center transition-colors duration-200 whitespace-pre-line overflow-hidden";
+    'w-[186px] h-[146px] flex justify-center items-center px-4 py-7 text-2xl font-normal text-center transition-colors duration-200 whitespace-pre-line overflow-hidden';
 
   if (disabled) {
     return (
-      <div className={`${baseClass} text-blue cursor-not-allowed`}>{label}</div>
+      <div className={`${baseClass} text-primary cursor-not-allowed`}>{label}</div>
     );
   }
 
@@ -28,7 +28,7 @@ export default function NavItem({
     <Link
       href={href}
       className={`${baseClass} ${
-        isActive ? "bg-blue text-white" : "text-blue hover:bg-blue-900/10"
+        isActive ? 'bg-primary text-white' : 'text-primary hover:bg-blue-900/10'
       }`}
     >
       <div className="">{label}</div>
