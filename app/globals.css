@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @font-face {
   font-family: 'Pretendard';
@@ -8,7 +8,9 @@
 @theme {
   --font-sans: 'Pretendard', ui-sans-serif, system-ui;
 
-  --color-primary: #224C97;
+  --color-primary: #224c97;
+  --color-white: #f9f9f9;
+  --color-text: #212121;
 
   --text-heading: 1.75rem;
   --text-input: 1.5rem;
