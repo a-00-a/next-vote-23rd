@@ -1,7 +1,6 @@
 'use client';
 
 export default function LoginForm() {
-    // 올바른 FormEvent 타입으로 수정
     const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);

@@ -74,14 +74,16 @@
 //     </div>
 //   );
 // }
-
+// 바뀌기 전 코드이므로 마음에 들면 이 주석과 함께 다 지워주시면 됩니다.
 
 'use client';
 
 import { useState } from 'react';
 
 export default function SignupForm() {
-  const [userType, setUserType] = useState<'프론트엔드' | '백엔드'>('프론트엔드');
+  const [userType, setUserType] = useState<'프론트엔드' | '백엔드'>(
+    '프론트엔드'
+  );
 
   const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -95,37 +97,36 @@ export default function SignupForm() {
       alert('비밀번호가 일치하지 않습니다.');
       return;
     }
-    
+
     // TODO: 회원가입 API 연동
     console.log({ userType, name, id, password });
   };
 
   return (
     <div className="flex items-center justify-center min-h-dvh bg-[#FFFFFF] px-4 py-10 font-pretendard">
-      
       <div className="flex flex-col md:flex-row w-full max-w-4xl bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100">
-        
         <div className="hidden md:flex flex-col justify-between w-5/12 bg-blue-50/50 p-12">
           <div>
-            <h2 className="text-3xl font-extrabold text-blue-900 tracking-tight leading-tight">
-              함께 만들어가는<br />
+            <h2 className="text-3xl font-extrabold text-primary tracking-tight leading-tight">
+              함께 만들어가는
+              <br />
               새로운 투표 문화,
             </h2>
-            <p className="mt-4 text-blue-900/70 font-medium">
+            <p className="mt-4 text-primary/70 font-medium">
               Groupeat에서 시작해보세요.
             </p>
           </div>
-          
+
           <div className="relative w-full h-48 opacity-80">
             <div className="absolute bottom-0 left-0 w-32 h-32 bg-primary/10 rounded-full blur-2xl"></div>
             <div className="absolute top-10 right-10 w-24 h-24 bg-blue-400/20 rounded-full blur-xl"></div>
           </div>
         </div>
 
-        {/* ─── 오른쪽 영역: 입력 폼 섹션 ─── */}
         <div className="w-full md:w-7/12 p-8 md:p-14 lg:p-16 flex flex-col justify-center">
-          
-          <h1 className="text-2xl font-bold text-gray-800 mb-8 md:hidden">회원가입</h1>
+          <h1 className="text-2xl font-bold text-gray-800 mb-8 md:hidden">
+            회원가입
+          </h1>
 
           <div className="relative flex w-full p-1.5 bg-gray-100 rounded-xl mb-8">
             <button
@@ -133,7 +134,7 @@ export default function SignupForm() {
               onClick={() => setUserType('프론트엔드')}
               className={`flex-1 py-3 text-sm font-bold rounded-lg transition-all duration-300 ${
                 userType === '프론트엔드'
-                  ? 'bg-white text-blue-900 shadow-sm'
+                  ? 'bg-white text-primary shadow-sm'
                   : 'text-gray-500 hover:text-gray-700'
               }`}
             >
@@ -144,7 +145,7 @@ export default function SignupForm() {
               onClick={() => setUserType('백엔드')}
               className={`flex-1 py-3 text-sm font-bold rounded-lg transition-all duration-300 ${
                 userType === '백엔드'
-                  ? 'bg-white text-blue-900 shadow-sm'
+                  ? 'bg-white text-primary shadow-sm'
                   : 'text-gray-500 hover:text-gray-700'
               }`}
             >
@@ -191,7 +192,6 @@ export default function SignupForm() {
               회원가입
             </button>
           </form>
-          
         </div>
       </div>
     </div>

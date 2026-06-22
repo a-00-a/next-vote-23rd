@@ -51,15 +51,15 @@
 //       {user ? (
 //         <>
 //           <div className="flex flex-col justify-center items-center gap-2.5 w-full h-[282px] pt-[50px] pb-7">
-//             <div className="text-4xl font-bold text-blue-900 text-center w-40 h-25">
+//             <div className="text-4xl font-bold text-primary text-center w-40 h-25">
 //               {user.name}
 //             </div>
-//             <div className="text-2xl font-normal text-blue-900 text-center whitespace-pre-line w-40 h-24">
+//             <div className="text-2xl font-normal text-primary text-center whitespace-pre-line w-40 h-24">
 //               {`${user.team}\n${user.part}`}
 //             </div>
 //             <button
-//               className="w-34 h-8 text-xl text-blue-900 border-2 border-blue-900 rounded-lg
-//                          hover:bg-blue-900 hover:text-white transition-colors duration-200"
+//               className="w-34 h-8 text-xl text-primary border-2 border-primary rounded-lg
+//                          hover:bg-primary hover:text-white transition-colors duration-200"
 //             >
 //               로그아웃
 //             </button>
@@ -72,7 +72,7 @@
 //       ${
 //         pathname === '/signup' || pathname === '/'
 //           ? 'bg-primary text-white'
-//           : 'bg-white text-primary hover:bg-blue-900/10'
+//           : 'bg-white text-primary hover:bg-primary/10'
 //       }`}
 //         >
 //           <div className="text-2xl font-extrabold text-center px-[57px] py-[125px]">
@@ -94,6 +94,8 @@
 //     </nav>
 //   );
 // }
+
+// 바뀌기 전 코드이므로 마음에 들면 이 주석과 함께 다 지워주시면 됩니다.
 
 'use client';
 
@@ -143,7 +145,6 @@ export default function Navbar() {
     <>
       <header className="fixed top-0 left-0 w-full h-16 bg-[#FFFFFF] border-b border-gray-100 z-40 font-pretendard">
         <div className="flex justify-between items-center w-full h-full px-5 max-w-7xl mx-auto">
-          
           <Link href="/" className="flex items-center">
             <Logo className="w-auto h-auto mix-blend-multiply" />
           </Link>
@@ -164,13 +165,13 @@ export default function Navbar() {
             <div className="flex items-center gap-4 border-l border-gray-200 pl-6">
               {user ? (
                 <div className="flex items-center gap-4">
-                  <div className="text-sm text-blue-900 text-right">
+                  <div className="text-sm text-primary text-right">
                     <span className="font-bold">{user.name}</span>
                     <span className="text-gray-500 ml-2">
                       {user.team} | {user.part}
                     </span>
                   </div>
-                  <button className="px-4 py-1.5 text-sm font-medium text-blue-900 border border-blue-900 rounded-lg hover:bg-blue-900 hover:text-white transition-colors duration-200">
+                  <button className="px-4 py-1.5 text-sm font-medium text-primary border border-primary rounded-lg hover:bg-primary hover:text-white transition-colors duration-200">
                     로그아웃
                   </button>
                 </div>
@@ -190,8 +191,18 @@ export default function Navbar() {
             onClick={() => setIsMobileMenuOpen(true)}
             aria-label="메뉴 열기"
           >
-            <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            <svg
+              className="w-7 h-7"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 6h16M4 12h16M4 18h16"
+              />
             </svg>
           </button>
         </div>
@@ -215,8 +226,18 @@ export default function Navbar() {
             onClick={() => setIsMobileMenuOpen(false)}
             aria-label="메뉴 닫기"
           >
-            <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            <svg
+              className="w-7 h-7"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
             </svg>
           </button>
         </div>
@@ -224,11 +245,11 @@ export default function Navbar() {
         <div className="px-6 pb-6 border-b border-gray-100">
           {user ? (
             <div className="flex flex-col gap-3">
-              <div className="text-2xl font-bold text-blue-900">{user.name}</div>
+              <div className="text-2xl font-bold text-primary">{user.name}</div>
               <div className="text-base text-gray-500">
                 {user.team} • {user.part}
               </div>
-              <button className="mt-2 w-full py-2 text-sm text-blue-900 border border-blue-900 rounded-lg hover:bg-blue-900 hover:text-white transition-colors duration-200">
+              <button className="mt-2 w-full py-2 text-sm text-primary border border-primary rounded-lg hover:bg-primary hover:text-white transition-colors duration-200">
                 로그아웃
               </button>
             </div>
