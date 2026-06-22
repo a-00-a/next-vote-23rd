@@ -31,7 +31,7 @@ const members = [
     name: '배성준',
   },
   {
-    name: '최민주',
+    name: '황영준',
   },
 ];
 
@@ -43,7 +43,7 @@ export default function PartLeaderVoteForm() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center gap-4 pl-">
+    <div className="flex flex-col items-center justify-center gap-4">
       <div className="grid grid-cols-6 gap-y-4 gap-x-8">
         {members.map((member, index) => (
           <div

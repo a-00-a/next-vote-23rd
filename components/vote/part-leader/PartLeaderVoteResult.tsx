@@ -40,7 +40,7 @@ const ranking = [
     votes: 4,
   },
   {
-    memberName: '최민주',
+    memberName: '황영준',
     votes: 5,
   },
 ];
@@ -70,7 +70,7 @@ export default function PartLeaderVoteResult() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center gap-4 pl-">
+    <div className="flex flex-col items-center justify-center gap-4">
       <div className="text-xl font-semibold text-primary">
         👑 {remainingWinnerCount}개의 왕관을 찾아보세요!
       </div>
