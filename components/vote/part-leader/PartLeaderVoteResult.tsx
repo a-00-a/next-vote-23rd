@@ -48,8 +48,8 @@ const ranking = [
 export default function PartLeaderVoteResult() {
   const [revealedMembers, setRevealedMembers] = useState<string[]>([]);
 
-  const [shuffledRanking] = useState(
-    () => [...ranking].sort(() => Math.random() - 0.5)
+  const [shuffledRanking] = useState(() =>
+    [...ranking].sort(() => Math.random() - 0.5)
   );
 
   const maxVotes = Math.max(...ranking.map((rank) => rank.votes));
