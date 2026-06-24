@@ -14,4 +14,9 @@ export const API_ENDPOINTS = {
     VOTE: '/demoday/vote',
     RESULT: '/demoday/vote/result',
   },
+  PART_LEADER: {
+    CANDIDATES: '/vote/part-leader/candidates',
+    VOTE: '/vote/part-leader',
+    RESULT: '/vote/part-leader/result',
+  },
 } as const;
