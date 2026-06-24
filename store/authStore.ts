@@ -1,3 +1,4 @@
+// 클라이언트 컴포넌트에서만 사용 가능
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { UserSummary } from '@/types/auth';
