@@ -10,7 +10,7 @@ export const API_ENDPOINTS = {
     LOGOUT: '/auth/logout',
   },
   DEMODAY: {
-    PROGRESS: '/demoday/vote/progress',
+    LIVE_STATUS: '/demoday/vote/progress',
     VOTE: '/demoday/vote',
     RESULT: '/demoday/vote/result',
   },
