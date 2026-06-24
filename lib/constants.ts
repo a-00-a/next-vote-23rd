@@ -9,4 +9,9 @@ export const API_ENDPOINTS = {
     SIGNUP: '/auth/signup',
     LOGOUT: '/auth/logout',
   },
+  DEMODAY: {
+    PROGRESS: '/demoday/vote/progress',
+    VOTE: '/demoday/vote',
+    RESULT: '/demoday/vote/result',
+  },
 } as const;
