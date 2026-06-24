@@ -1,3 +1,7 @@
+if (!process.env.NEXT_PUBLIC_API_URL) {
+  throw new Error('NEXT_PUBLIC_API_URL이 설정되지 않았습니다.');
+}
+
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export interface ApiError {
@@ -43,5 +47,7 @@ export async function fetchApi<T>(
     }
   }
 
-  return res.json();
+  return res.json().catch(() => {
+    throw { status: res.status, message: '응답 파싱에 실패했습니다.' };
+  });
 }
