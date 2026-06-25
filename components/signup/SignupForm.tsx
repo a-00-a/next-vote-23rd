@@ -1,27 +1,29 @@
 'use client';
 
 import { useState } from 'react';
+import { Team, Part } from '@/types/auth';
 
 export default function SignupForm() {
-  const [userType, setUserType] = useState<'프론트엔드' | '백엔드'>(
-    '프론트엔드'
-  );
+  const [part, setPart] = useState<Part>('FRONTEND');
+  const [team, setTeam] = useState<Team>('ConX');
+  const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const name = formData.get('name');
-    const id = formData.get('ID');
+    const loginId = formData.get('loginId');
     const password = formData.get('password');
     const confirmPassword = formData.get('confirmPassword');
+    const inviteCode = formData.get('inviteCode');
 
     if (password !== confirmPassword) {
-      alert('비밀번호가 일치하지 않습니다.');
+      setError('비밀번호가 일치하지 않습니다.');
       return;
     }
 
     // TODO: 회원가입 API 연동
-    console.log({ userType, name, id, password });
+    console.log({ part, team, name, loginId, password, inviteCode });
   };
 
   return (
@@ -53,9 +55,9 @@ export default function SignupForm() {
           <div className="relative flex w-full p-1.5 bg-gray-100 rounded-xl mb-8">
             <button
               type="button"
-              onClick={() => setUserType('프론트엔드')}
+              onClick={() => setPart('FRONTEND')}
               className={`flex-1 py-3 text-sm font-bold rounded-lg transition-all duration-300 ${
-                userType === '프론트엔드'
+                part === 'FRONTEND'
                   ? 'bg-white text-primary shadow-sm'
                   : 'text-gray-500 hover:text-gray-700'
               }`}
@@ -64,9 +66,9 @@ export default function SignupForm() {
             </button>
             <button
               type="button"
-              onClick={() => setUserType('백엔드')}
+              onClick={() => setPart('BACKEND')}
               className={`flex-1 py-3 text-sm font-bold rounded-lg transition-all duration-300 ${
-                userType === '백엔드'
+                part === 'BACKEND'
                   ? 'bg-white text-primary shadow-sm'
                   : 'text-gray-500 hover:text-gray-700'
               }`}
