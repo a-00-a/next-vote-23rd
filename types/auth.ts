@@ -29,4 +29,4 @@ export interface SignupRequest {
 }
 
 export type SignupResponse = ApiResponseWrapper<string>;
-export type LogoutResponse = ApiResponseWrapper<string>;
+export type LogoutResponse = ApiResponseWrapper<null>;
