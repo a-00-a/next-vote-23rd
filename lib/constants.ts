@@ -4,12 +4,12 @@ export const COOKIE_NAME = {
 
 export const API_ENDPOINTS = {
   AUTH: {
-    LOGIN: '/api/auth/login',
+    LOGIN: '/proxy/auth/login',
     SIGNUP: '/signup',
-    LOGOUT: '/api/auth/logout',
+    LOGOUT: '/proxy/auth/logout',
   },
   DEMODAY: {
-    VOTE: '/api/v1/votes/demoday',
+    VOTE: '/proxy/votes/demoday',
     LIVE_STATUS: '/api/v1/votes/demoday/status',
     RESULT: '/api/v1/votes/demoday/results',
     TEAMS: '/api/v1/votes/demoday/teams',
