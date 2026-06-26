@@ -1,105 +1,34 @@
-// 'use client';
-
-// import { useState } from 'react';
-
-// export default function SignupForm() {
-//   const [userType, setUserType] = useState<'프론트엔드' | '백엔드'>(
-//     '프론트엔드'
-//   );
-
-//   const handleSubmit = (e: React.SyntheticEvent<HTMLFormElement>) => {
-//     e.preventDefault();
-//     const formData = new FormData(e.currentTarget);
-//     const name = formData.get('name');
-//     const password = formData.get('password');
-//     const confirmPassword = formData.get('confirmPassword');
-
-//     if (password !== confirmPassword) {
-//       alert('비밀번호가 일치하지 않습니다.');
-//       return;
-//     }
-//   };
-
-//   return (
-//     <div>
-//       <div className="flex flex-row items-center justify-center gap-4 mb-5">
-//         <button className={`w-88 h-15 cursor-pointer rounded-lg ${userType === '프론트엔드' ? 'bg-primary text-white' : 'bg-gray-200 text-gray-700'}`} onClick={() => setUserType('프론트엔드')}>
-//           프론트엔드
-//         </button>
-//         <button className={`w-88 h-15 cursor-pointer rounded-lg ${userType === '백엔드' ? 'bg-primary text-white' : 'bg-gray-200 text-gray-700'}`} onClick={() => setUserType('백엔드')}>
-//           백엔드
-//         </button>
-//       </div>
-
-//       <form
-//         onSubmit={handleSubmit}
-//         className="flex flex-col justify-center items-center gap-4 w-full"
-//       >
-//         <input
-//           name="name"
-//           type="text"
-//           placeholder="이름"
-//           required
-//           className="flex items-center w-180 h-15 border px-7 py-4.25 rounded-lg placeholder:text-input placeholder:text-gray-400 border-px border-gray-400"
-//         />
-//         <input
-//           name="ID"
-//           type="text"
-//           placeholder="아이디"
-//           required
-//           className="flex items-center w-180 h-15 border px-7 py-4.25 rounded-lg placeholder:text-input placeholder:text-gray-400 border-px border-gray-400"
-//         />
-//         <input
-//           name="password"
-//           type="password"
-//           placeholder="비밀번호"
-//           required
-//           className="flex items-center w-180 h-15 border px-7 py-4.25 rounded-lg placeholder:text-input placeholder:text-gray-400 border-px border-gray-400"
-//         />
-//         <input
-//           name="confirmPassword"
-//           type="password"
-//           placeholder="비밀번호 확인"
-//           required
-//           className="flex items-center w-180 h-15 border px-7 py-4.25 rounded-lg placeholder:text-input placeholder:text-gray-400 border-px border-gray-400"
-//         />
-
-//         <button
-//           type="submit"
-//           className="w-100 h-23 px-35 bg-primary text-white text-heading p-2 rounded-lg disabled:bg-gray-400 font-semibold"
-//         >
-//           회원가입
-//         </button>
-//       </form>
-//     </div>
-//   );
-// }
-// 바뀌기 전 코드이므로 마음에 들면 이 주석과 함께 다 지워주시면 됩니다.
-
 'use client';
 
 import { useState } from 'react';
+import { Team, Part } from '@/types/auth';
+import { Eye, EyeOff } from 'lucide-react';
 
 export default function SignupForm() {
-  const [userType, setUserType] = useState<'프론트엔드' | '백엔드'>(
-    '프론트엔드'
-  );
+  const [part, setPart] = useState<Part>('FRONTEND');
+  const [team, setTeam] = useState<Team>('ConX');
+  const [error, setError] = useState<string | null>(null);
+  const [passwordError, setPasswordError] = useState<string | null>(null);
+
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const name = formData.get('name');
-    const id = formData.get('ID');
+    const loginId = formData.get('loginId');
     const password = formData.get('password');
     const confirmPassword = formData.get('confirmPassword');
+    const inviteCode = formData.get('inviteCode');
 
     if (password !== confirmPassword) {
-      alert('비밀번호가 일치하지 않습니다.');
+      setPasswordError('비밀번호가 일치하지 않습니다.');
       return;
     }
 
     // TODO: 회원가입 API 연동
-    console.log({ userType, name, id, password });
+    console.log({ part, team, name, loginId, password, inviteCode });
   };
 
   return (
@@ -131,9 +60,9 @@ export default function SignupForm() {
           <div className="relative flex w-full p-1.5 bg-gray-100 rounded-xl mb-8">
             <button
               type="button"
-              onClick={() => setUserType('프론트엔드')}
+              onClick={() => setPart('FRONTEND')}
               className={`flex-1 py-3 text-sm font-bold rounded-lg transition-all duration-300 ${
-                userType === '프론트엔드'
+                part === 'FRONTEND'
                   ? 'bg-white text-primary shadow-sm'
                   : 'text-gray-500 hover:text-gray-700'
               }`}
@@ -142,9 +71,9 @@ export default function SignupForm() {
             </button>
             <button
               type="button"
-              onClick={() => setUserType('백엔드')}
+              onClick={() => setPart('BACKEND')}
               className={`flex-1 py-3 text-sm font-bold rounded-lg transition-all duration-300 ${
-                userType === '백엔드'
+                part === 'BACKEND'
                   ? 'bg-white text-primary shadow-sm'
                   : 'text-gray-500 hover:text-gray-700'
               }`}
@@ -155,6 +84,19 @@ export default function SignupForm() {
 
           <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full">
             <div className="space-y-4">
+              <select
+                value={team}
+                onChange={(e) => setTeam(e.target.value as Team)}
+                className="w-full px-5 py-4 bg-gray-50 border border-gray-200 rounded-xl text-gray-800 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
+              >
+                {(['ConX', 'Ditda', 'Groupeat', 'IPX', 'Jobdri'] as Team[]).map(
+                  (t) => (
+                    <option key={t} value={t}>
+                      {t}
+                    </option>
+                  )
+                )}
+              </select>
               <input
                 name="name"
                 type="text"
@@ -163,28 +105,73 @@ export default function SignupForm() {
                 className="w-full px-5 py-4 bg-gray-50 border border-gray-200 rounded-xl placeholder:text-gray-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-gray-800"
               />
               <input
-                name="ID"
+                name="loginId"
                 type="text"
                 placeholder="아이디"
                 required
                 className="w-full px-5 py-4 bg-gray-50 border border-gray-200 rounded-xl placeholder:text-gray-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-gray-800"
               />
+              <div className="relative">
+                <input
+                  name="password"
+                  type={showPassword ? 'text' : 'password'}
+                  placeholder="비밀번호"
+                  required
+                  className="w-full px-5 py-4 bg-gray-50 border border-gray-200 rounded-xl placeholder:text-gray-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-gray-800"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                >
+                  {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                </button>
+              </div>
+              <div className="relative">
+                <input
+                  name="confirmPassword"
+                  type={showConfirmPassword ? 'text' : 'password'}
+                  placeholder="비밀번호 확인"
+                  required
+                  onBlur={(e) => {
+                    const password = (
+                      e.currentTarget.form?.elements.namedItem(
+                        'password'
+                      ) as HTMLInputElement
+                    )?.value;
+                    if (password !== e.target.value) {
+                      setPasswordError('비밀번호가 일치하지 않습니다.');
+                    } else {
+                      setPasswordError(null);
+                    }
+                  }}
+                  className="w-full px-5 py-4 bg-gray-50 border border-gray-200 rounded-xl placeholder:text-gray-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-gray-800"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                >
+                  {showConfirmPassword ? (
+                    <EyeOff size={20} />
+                  ) : (
+                    <Eye size={20} />
+                  )}
+                </button>
+              </div>
               <input
-                name="password"
-                type="password"
-                placeholder="비밀번호"
-                required
-                className="w-full px-5 py-4 bg-gray-50 border border-gray-200 rounded-xl placeholder:text-gray-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-gray-800"
-              />
-              <input
-                name="confirmPassword"
-                type="password"
-                placeholder="비밀번호 확인"
+                name="inviteCode"
+                type="text"
+                placeholder="초대코드 입력"
                 required
                 className="w-full px-5 py-4 bg-gray-50 border border-gray-200 rounded-xl placeholder:text-gray-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-gray-800"
               />
             </div>
 
+            {passwordError && (
+              <p className="text-red-500 text-sm">{passwordError}</p>
+            )}
+            {error && <p className="text-red-500 text-sm">{error}</p>}
             <button
               type="submit"
               className="w-full py-4 mt-6 bg-primary text-white text-lg font-bold rounded-xl hover:bg-blue-800 hover:-translate-y-0.5 transition-all duration-300 shadow-md hover:shadow-lg disabled:bg-gray-400 disabled:transform-none disabled:shadow-none"
