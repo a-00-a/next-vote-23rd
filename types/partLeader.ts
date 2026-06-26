@@ -1,4 +1,4 @@
-import { Part, Team } from './auth';
+import { Part } from './auth';
 import { ApiResponseWrapper } from './common';
 
 export interface PartLeaderVoteRequest {
