@@ -7,6 +7,7 @@ export default function SignupForm() {
   const [part, setPart] = useState<Part>('FRONTEND');
   const [team, setTeam] = useState<Team>('ConX');
   const [error, setError] = useState<string | null>(null);
+  const [passwordError, setPasswordError] = useState<string | null>(null);
 
   const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -18,7 +19,7 @@ export default function SignupForm() {
     const inviteCode = formData.get('inviteCode');
 
     if (password !== confirmPassword) {
-      setError('비밀번호가 일치하지 않습니다.');
+      setPasswordError('비밀번호가 일치하지 않습니다.');
       return;
     }
 
@@ -79,6 +80,19 @@ export default function SignupForm() {
 
           <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full">
             <div className="space-y-4">
+              <select
+                value={team}
+                onChange={(e) => setTeam(e.target.value as Team)}
+                className="w-full px-5 py-4 bg-gray-50 border border-gray-200 rounded-xl text-gray-800 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
+              >
+                {(['ConX', 'Ditda', 'Groupeat', 'IPX', 'Jobdri'] as Team[]).map(
+                  (t) => (
+                    <option key={t} value={t}>
+                      {t}
+                    </option>
+                  )
+                )}
+              </select>
               <input
                 name="name"
                 type="text"
@@ -87,7 +101,7 @@ export default function SignupForm() {
                 className="w-full px-5 py-4 bg-gray-50 border border-gray-200 rounded-xl placeholder:text-gray-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-gray-800"
               />
               <input
-                name="ID"
+                name="loginId"
                 type="text"
                 placeholder="아이디"
                 required
@@ -105,6 +119,18 @@ export default function SignupForm() {
                 type="password"
                 placeholder="비밀번호 확인"
                 required
+                onBlur={(e) => {
+                  const password = (
+                    e.currentTarget.form?.elements.namedItem(
+                      'password'
+                    ) as HTMLInputElement
+                  )?.value;
+                  if (password !== e.target.value) {
+                    setPasswordError('비밀번호가 일치하지 않습니다.');
+                  } else {
+                    setPasswordError(null);
+                  }
+                }}
                 className="w-full px-5 py-4 bg-gray-50 border border-gray-200 rounded-xl placeholder:text-gray-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-gray-800"
               />
               <input
@@ -116,6 +142,10 @@ export default function SignupForm() {
               />
             </div>
 
+            {passwordError && (
+              <p className="text-red-500 text-sm">{passwordError}</p>
+            )}
+            {error && <p className="text-red-500 text-sm">{error}</p>}
             <button
               type="submit"
               className="w-full py-4 mt-6 bg-primary text-white text-lg font-bold rounded-xl hover:bg-blue-800 hover:-translate-y-0.5 transition-all duration-300 shadow-md hover:shadow-lg disabled:bg-gray-400 disabled:transform-none disabled:shadow-none"
