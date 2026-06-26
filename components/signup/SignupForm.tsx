@@ -11,6 +11,7 @@ export default function SignupForm() {
   const [passwordError, setPasswordError] = useState<string | null>(null);
 
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -126,25 +127,38 @@ export default function SignupForm() {
                   {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                 </button>
               </div>
-              <input
-                name="confirmPassword"
-                type="password"
-                placeholder="비밀번호 확인"
-                required
-                onBlur={(e) => {
-                  const password = (
-                    e.currentTarget.form?.elements.namedItem(
-                      'password'
-                    ) as HTMLInputElement
-                  )?.value;
-                  if (password !== e.target.value) {
-                    setPasswordError('비밀번호가 일치하지 않습니다.');
-                  } else {
-                    setPasswordError(null);
-                  }
-                }}
-                className="w-full px-5 py-4 bg-gray-50 border border-gray-200 rounded-xl placeholder:text-gray-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-gray-800"
-              />
+              <div className="relative">
+                <input
+                  name="confirmPassword"
+                  type={showConfirmPassword ? 'text' : 'password'}
+                  placeholder="비밀번호 확인"
+                  required
+                  onBlur={(e) => {
+                    const password = (
+                      e.currentTarget.form?.elements.namedItem(
+                        'password'
+                      ) as HTMLInputElement
+                    )?.value;
+                    if (password !== e.target.value) {
+                      setPasswordError('비밀번호가 일치하지 않습니다.');
+                    } else {
+                      setPasswordError(null);
+                    }
+                  }}
+                  className="w-full px-5 py-4 bg-gray-50 border border-gray-200 rounded-xl placeholder:text-gray-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-gray-800"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                >
+                  {showConfirmPassword ? (
+                    <EyeOff size={20} />
+                  ) : (
+                    <Eye size={20} />
+                  )}
+                </button>
+              </div>
               <input
                 name="inviteCode"
                 type="text"
