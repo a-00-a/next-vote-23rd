@@ -1,11 +1,11 @@
 import { Team } from './auth';
-import { ApiResponse, VotingProgress } from './common';
+import { ApiResponseWrapper, VotingProgress } from './common';
 
 export interface DemodayVoteRequest {
-  teamName: Team;
+  team: Team;
 }
 
-export type DemodayVoteResponse = ApiResponse;
+export type DemodayVoteResponse = ApiResponseWrapper<null>;
 
 export interface DemodayLiveStatusResponse {
   votingProgress: VotingProgress;
