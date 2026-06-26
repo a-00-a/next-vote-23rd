@@ -1,6 +1,6 @@
 import { fetchApi } from '@/lib/fetch';
 import { API_ENDPOINTS } from '@/lib/constants';
-import { ApiResponseWrapper } from '@/types/common';
+
 import {
   LoginRequest,
   LoginResponse,
