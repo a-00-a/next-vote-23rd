@@ -7,6 +7,14 @@ import { Team, Part } from '@/types/auth';
 import { Eye, EyeOff } from 'lucide-react';
 import { signup } from '@/lib/api/auth';
 
+const TEAM_LABELS: Record<Team, string> = {
+  CONX: 'ConX',
+  DITDA: 'Ditda',
+  GROUPEAT: 'Groupeat',
+  IPX: 'IPX',
+  JOBDRI: 'Jobdri',
+};
+
 export default function SignupForm() {
   const router = useRouter();
   const [part, setPart] = useState<Part>('FRONTEND');
@@ -107,7 +115,7 @@ export default function SignupForm() {
                 {(['CONX', 'DITDA', 'GROUPEAT', 'IPX', 'JOBDRI'] as Team[]).map(
                   (t) => (
                     <option key={t} value={t}>
-                      {t}
+                      {TEAM_LABELS[t]}
                     </option>
                   )
                 )}
