@@ -13,6 +13,13 @@ export interface DemodayVoteResult {
 
 export type DemodayVoteResponse = ApiResponseWrapper<DemodayVoteResult>;
 
+export interface DemodayTeam {
+  team: Team;
+  teamName: string;
+}
+
+export type DemodayTeamListResponse = ApiResponseWrapper<DemodayTeam[]>;
+
 export interface DemodayLiveStatusResult {
   totalVoterCount: number;
   votedCount: number;
