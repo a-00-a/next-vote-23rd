@@ -1,73 +1,58 @@
 'use client';
 
 import { useState } from 'react';
+import { PartLeaderResultResult } from '@/types/partLeader';
 
-const ranking = [
-  {
-    memberName: '권가은',
-    votes: 1,
-  },
-  {
-    memberName: '신유진',
-    votes: 5,
-  },
-  {
-    memberName: '김문기',
-    votes: 8,
-  },
-  {
-    memberName: '오예린',
-    votes: 1,
-  },
-  {
-    memberName: '김서연',
-    votes: 2,
-  },
-  {
-    memberName: '이예지',
-    votes: 8,
-  },
-  {
-    memberName: '노수진',
-    votes: 3,
-  },
-  {
-    memberName: '장효신',
-    votes: 1,
-  },
-  {
-    memberName: '배성준',
-    votes: 4,
-  },
-  {
-    memberName: '황영준',
-    votes: 5,
-  },
-];
+interface PartLeaderVoteResultProps {
+  initialResult: PartLeaderResultResult | null;
+}
 
-export default function PartLeaderVoteResult() {
+export default function PartLeaderVoteResult({
+  initialResult,
+}: PartLeaderVoteResultProps) {
+  const ranking = initialResult?.candidates ?? [];
+
   const [revealedMembers, setRevealedMembers] = useState<string[]>([]);
 
   const [shuffledRanking] = useState(() =>
     [...ranking].sort(() => Math.random() - 0.5)
   );
 
-  const maxVotes = Math.max(...ranking.map((rank) => rank.votes));
+  const maxVotes = Math.max(...ranking.map((rank) => rank.voteCount));
 
-  const winnerCount = ranking.filter((rank) => rank.votes === maxVotes).length;
+  const winnerCount = ranking.filter(
+    (rank) => rank.voteCount === maxVotes
+  ).length;
 
   const foundWinnerCount = ranking.filter(
-    (rank) =>
-      rank.votes === maxVotes && revealedMembers.includes(rank.memberName)
+    (rank) => rank.voteCount === maxVotes && revealedMembers.includes(rank.name)
   ).length;
 
   const remainingWinnerCount = winnerCount - foundWinnerCount;
 
-  const handleCardClick = (memberName: string) => {
+  const handleCardClick = (name: string) => {
     setRevealedMembers((prev) =>
-      prev.includes(memberName) ? prev : [...prev, memberName]
+      prev.includes(name) ? prev : [...prev, name]
     );
   };
+
+  if (!initialResult) {
+    return (
+      <div className="flex flex-col items-center justify-center w-full min-h-screen p-4 bg-gray-50">
+        <div className="flex flex-col items-center justify-center w-full max-w-2xl p-12 bg-white border border-gray-100 shadow-sm rounded-3xl min-h-[400px]">
+          <div className="flex items-center justify-center w-20 h-20 mb-6 bg-gray-100 rounded-full">
+            <span className="text-4xl">🔒</span>
+          </div>
+          <h3 className="mb-2 text-2xl font-bold text-gray-800">
+            결과가 아직 공개되지 않았습니다
+          </h3>
+          <p className="text-center text-gray-500">
+            투표가 모두 종료될 때까지 조금만 기다려 주세요!
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col items-center justify-center gap-4">
@@ -76,24 +61,24 @@ export default function PartLeaderVoteResult() {
       </div>
       <div className="grid grid-cols-6 gap-y-4 gap-x-8">
         {shuffledRanking.map((rank, index) => {
-          const isWinner = rank.votes === maxVotes;
-          const isRevealed = revealedMembers?.includes(rank.memberName);
+          const isWinner = rank.voteCount === maxVotes;
+          const isRevealed = revealedMembers?.includes(rank.name);
 
           return (
             <div
-              key={rank.memberName}
+              key={rank.candidateId}
               className={`flex flex-col items-center justify-center col-span-2 ${
                 index % 2 === 0 ? 'col-start-2' : ''
               }`}
             >
               <button
                 type="button"
-                onClick={() => handleCardClick(rank.memberName)}
+                onClick={() => handleCardClick(rank.name)}
                 className={`flex justify-center items-center w-74 h-18 px-21 py-5 rounded-lg m-4 cursor-pointer ${isRevealed ? 'bg-primary text-white border-none' : 'bg-white text-black border border-primary border-px'}`}
               >
                 {isRevealed ? (
                   <div className="flex items-center gap-2">
-                    <span>{rank.memberName}</span>
+                    <span>{rank.name}</span>
                     {isWinner && <span>👑</span>}
                   </div>
                 ) : (
