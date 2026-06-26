@@ -6,17 +6,8 @@ import { usePathname } from 'next/navigation';
 import Logo from '@/public/logo-ceos.svg';
 import NavItem from './NavItem';
 
-interface User {
-  name: string;
-  team: string;
-  part: string;
-}
-
-const MOCK_USER: User = {
-  name: '황영준',
-  team: '그루핏',
-  part: 'FE',
-};
+import { useAuthStore } from '@/store/authStore';
+import { UserSummary } from '@/types/auth';
 
 const NAV_ITEMS = [
   { label: '파트장 투표', href: '/part-leader' },
@@ -27,7 +18,7 @@ export default function Navbar() {
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const user = MOCK_USER;
+  const user = useAuthStore((state) => state.user);
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
