@@ -5,7 +5,13 @@ export interface DemodayVoteRequest {
   team: Team;
 }
 
-export type DemodayVoteResponse = ApiResponseWrapper<null>;
+export interface DemodayVoteResult {
+  voteId: number;
+  selectedTeam: Team;
+  selectedTeamName: string;
+}
+
+export type DemodayVoteResponse = ApiResponseWrapper<DemodayVoteResult>;
 
 export interface DemodayLiveStatusResult {
   totalVoterCount: number;
@@ -20,17 +26,5 @@ export interface DemodayLiveStatusResult {
 
 export type DemodayLiveStatusResponse =
   ApiResponseWrapper<DemodayLiveStatusResult>;
-
-export interface DemodayResultItem {
-  ranking: number;
-  team: Team;
-  teamName: string;
-  voteCount: number;
-  isWinner: boolean;
-}
-
-export interface DemodayResultResult {
-  teams: DemodayResultItem[];
-}
 
 export type DemodayResultResponse = ApiResponseWrapper<null>;
