@@ -1,27 +1,37 @@
-const ranking = [
-  {
-    teamName: '팀 A',
-    votes: 13,
-  },
-  {
-    teamName: '팀 B',
-    votes: 10,
-  },
-  {
-    teamName: '팀 C',
-    votes: 8,
-  },
-  {
-    teamName: '팀 D',
-    votes: 5,
-  },
-  {
-    teamName: '팀 E',
-    votes: 3,
-  },
-];
+import { cookies } from 'next/headers';
+import { getDemodayResult } from '@/lib/api/demoday';
+import { DemodayResultResult } from '@/types/demoday';
 
-export default function DemodayResult() {
+export default async function DemodayResult() {
+  const cookieStore = await cookies();
+  const token = cookieStore.get('accessToken')?.value;
+  const serverHeaders: Record<string, string> = token
+    ? { Cookie: `accessToken=${token}` }
+    : {};
+
+  let result: DemodayResultResult | null = null;
+
+  try {
+    const resultRes = await getDemodayResult(serverHeaders);
+    result = resultRes.isSuccess ? resultRes.result : null;
+  } catch (err) {
+    console.error('결과 조회 에러:', err);
+  }
+
+  // result가 null이면 아직 투표 중
+  if (!result) {
+    return (
+      <div className="flex flex-col w-full min-h-screen justify-center items-center gap-4">
+        <h1 className="text-2xl font-bold text-gray-600">
+          아직 투표가 진행 중입니다.
+        </h1>
+        <p className="text-gray-400">
+          모든 투표가 완료된 후 결과를 확인할 수 있어요.
+        </p>
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-col w-full min-h-screen justify-center p-4 gap-10 bg-gray-50">
       <div className="flex flex-col items-center justify-center gap-3">
@@ -45,9 +55,9 @@ export default function DemodayResult() {
             </thead>
 
             <tbody className="divide-y divide-gray-100">
-              {ranking.map((team, index) => (
+              {result?.teams.map((team, index) => (
                 <tr
-                  key={team.teamName}
+                  key={team.team}
                   className="transition-colors hover:bg-gray-50/80"
                 >
                   <td className="px-6 py-5 text-center">
@@ -69,7 +79,7 @@ export default function DemodayResult() {
                     {team.teamName}
                   </td>
                   <td className="px-6 py-5 text-center font-semibold text-primary">
-                    {team.votes} 표
+                    {team.voteCount} 표
                   </td>
                 </tr>
               ))}
