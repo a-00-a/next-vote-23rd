@@ -21,19 +21,16 @@ export interface DemodayLiveStatusResult {
 export type DemodayLiveStatusResponse =
   ApiResponseWrapper<DemodayLiveStatusResult>;
 
-export interface DemodayResultResponse {
-  votingProgress: {
-    detail: {
-      backendTotal: number;
-      backendVoted: number;
-      frontendTotal: number;
-      frontendVoted: number;
-    };
-  };
-  voteResult: {
-    ranking: number;
-    teamName: Team;
-    voteCount: number;
-    isWinner: boolean;
-  }[];
+export interface DemodayResultItem {
+  ranking: number;
+  team: Team;
+  teamName: string;
+  voteCount: number;
+  isWinner: boolean;
 }
+
+export interface DemodayResultResult {
+  teams: DemodayResultItem[];
+}
+
+export type DemodayResultResponse = ApiResponseWrapper<null>;
