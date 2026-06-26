@@ -1,6 +1,9 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { logout } from '@/lib/api/auth';
+import { ApiError } from '@/lib/fetch';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import Logo from '@/public/logo-ceos.svg';
@@ -14,6 +17,9 @@ const NAV_ITEMS = [
 ];
 
 export default function Navbar() {
+  const router = useRouter();
+  const { clearUser } = useAuthStore();
+
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -31,6 +37,20 @@ export default function Navbar() {
       document.body.style.overflow = 'unset';
     }
   }, [isMobileMenuOpen]);
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      clearUser();
+      router.push('/login');
+    } catch (err) {
+      const error = err as ApiError;
+      console.error(error.message);
+      // 에러가 나도 로그아웃 처리
+      clearUser();
+      router.push('/login');
+    }
+  };
 
   return (
     <>
@@ -62,7 +82,10 @@ export default function Navbar() {
                       {user.team} | {user.part}
                     </span>
                   </div>
-                  <button className="px-4 py-1.5 text-sm font-medium text-primary border border-primary rounded-lg hover:bg-primary hover:text-white transition-colors duration-200">
+                  <button
+                    onClick={handleLogout}
+                    className="px-4 py-1.5 text-sm font-medium text-primary border border-primary rounded-lg hover:bg-primary hover:text-white transition-colors duration-200"
+                  >
                     로그아웃
                   </button>
                 </div>
@@ -140,7 +163,10 @@ export default function Navbar() {
               <div className="text-base text-gray-500">
                 {user.team} • {user.part}
               </div>
-              <button className="mt-2 w-full py-2 text-sm text-primary border border-primary rounded-lg hover:bg-primary hover:text-white transition-colors duration-200">
+              <button
+                onClick={handleLogout}
+                className="mt-2 w-full py-2 text-sm text-primary border border-primary rounded-lg hover:bg-primary hover:text-white transition-colors duration-200"
+              >
                 로그아웃
               </button>
             </div>
