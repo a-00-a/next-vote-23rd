@@ -41,13 +41,7 @@ export interface Candidate {
 
 export type CandidateListResponse = ApiResponseWrapper<Candidate[]>;
 
-export interface CandidateDetail {
-  candidateId: number;
-  name: string;
-  part: Part;
-  partName: string;
-  affiliation: string;
-  imageUrl: string | null;
+export interface CandidateDetail extends Candidate {
   description: string;
 }
 
