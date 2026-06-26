@@ -35,7 +35,10 @@ export async function fetchApi<T>(
         window.location.href = '/login';
         throw { status: 401, message: '로그인이 필요합니다.' };
       case 403:
-        throw { status: 403, message: '접근 권한이 없습니다.' };
+        throw {
+          status: 403,
+          message: error.message ?? '접근 권한이 없습니다.',
+        };
       case 404:
         throw { status: 404, message: '요청한 데이터를 찾을 수 없습니다.' };
       case 409:
