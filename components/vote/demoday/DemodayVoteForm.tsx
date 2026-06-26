@@ -36,7 +36,6 @@ export default function DemodayVoteForm({
       if (response.isSuccess) {
         alert('투표가 성공적으로 완료되었습니다!');
         
-        // 💡 투표 성공 시, 서버 컴포넌트들의 데이터를 다시 패칭하여 실시간 현황 업데이트
         router.refresh(); 
       } else {
         alert(response.message || '투표 처리에 실패했습니다.');
