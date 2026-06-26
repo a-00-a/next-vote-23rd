@@ -1,5 +1,6 @@
 import { fetchApi } from '@/lib/fetch';
 import { API_ENDPOINTS } from '@/lib/constants';
+import { ApiResponseWrapper } from '@/types/common';
 import {
   LoginRequest,
   LoginResponse,
@@ -9,7 +10,7 @@ import {
 } from '@/types/auth';
 
 export const login = (body: LoginRequest) =>
-  fetchApi<LoginResponse>(API_ENDPOINTS.AUTH.LOGIN, {
+  fetchApi<ApiResponseWrapper<LoginResponse>>(API_ENDPOINTS.AUTH.LOGIN, {
     method: 'POST',
     body: JSON.stringify(body),
   });
