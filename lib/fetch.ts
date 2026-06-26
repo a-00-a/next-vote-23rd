@@ -11,13 +11,21 @@ export interface ApiError {
 
 export async function fetchApi<T>(
   endpoint: string,
-  options: RequestInit = {}
+  options: RequestInit = {},
+  serverHeaders?: Record<string, string>
 ): Promise<T> {
-  const res = await fetch(`${BASE_URL}${endpoint}`, {
+  const url = endpoint.startsWith('/api/auth')
+    ? endpoint
+    : `${BASE_URL}${endpoint}`;
+
+  console.log('fetch URL:', url);
+
+  const res = await fetch(url, {
     ...options,
     credentials: 'include',
     headers: {
       'Content-Type': 'application/json',
+      ...serverHeaders,
       ...options.headers,
     },
   }).catch(() => {
