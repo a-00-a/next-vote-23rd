@@ -28,5 +28,5 @@ export interface SignupRequest {
   inviteCode: string;
 }
 
-export type SignupResponse = ApiResponseWrapper<string>;
+export type SignupResponse = ApiResponseWrapper<null>;
 export type LogoutResponse = ApiResponseWrapper<null>;
