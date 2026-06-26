@@ -1,4 +1,4 @@
-import { ApiResponse, ApiResponseWrapper } from './common';
+import { ApiResponseWrapper } from './common';
 
 export type Part = 'BACKEND' | 'FRONTEND';
 export type Team = 'CONX' | 'DITDA' | 'GROUPEAT' | 'IPX' | 'JOBDRI';
