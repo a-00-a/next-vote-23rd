@@ -40,7 +40,9 @@ export async function fetchApi<T>(
       case 400:
         throw { status: 400, message: error.message ?? '잘못된 요청입니다.' };
       case 401:
-        window.location.href = '/login';
+        if (typeof window !== 'undefined') {
+          window.location.href = '/login';
+        }
         throw { status: 401, message: '로그인이 필요합니다.' };
       case 403:
         throw {
