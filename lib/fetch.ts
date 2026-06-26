@@ -14,7 +14,7 @@ export async function fetchApi<T>(
   options: RequestInit = {},
   serverHeaders?: Record<string, string>
 ): Promise<T> {
-  const url = endpoint.startsWith('/api/auth')
+  const url = endpoint.startsWith('/proxy/')
     ? endpoint
     : `${BASE_URL}${endpoint}`;
 
