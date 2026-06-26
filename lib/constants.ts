@@ -16,7 +16,7 @@ export const API_ENDPOINTS = {
   },
   PART_LEADER: {
     CANDIDATES: '/api/v1/votes/part-leader/candidates', // 목록 + 상세 둘 다 사용
-    VOTE: '/api/v1/votes/part-leader',
+    VOTE: '/proxy/votes/part-leader',
     RESULT: '/api/v1/votes/part-leader/results',
   },
 } as const;
