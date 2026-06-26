@@ -21,8 +21,12 @@ export const voteForDemoday = (body: DemodayVoteRequest) =>
     body: JSON.stringify(body),
   });
 
-export const getDemodayResult = () =>
-  fetchApi<DemodayResultResponse>(API_ENDPOINTS.DEMODAY.RESULT);
+export const getDemodayResult = (serverHeaders?: Record<string, string>) =>
+  fetchApi<DemodayResultResponse>(
+    API_ENDPOINTS.DEMODAY.RESULT,
+    {},
+    serverHeaders
+  );
 
 export const getDemodayTeams = (serverHeaders?: Record<string, string>) => {
   console.log('getDemodayTeams 호출', serverHeaders);
