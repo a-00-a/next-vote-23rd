@@ -9,9 +9,14 @@ import {
   PartLeaderResultResponse,
 } from '@/types/partLeader';
 
-export const getCandidates = (part: Part) =>
+export const getCandidates = (
+  part: Part,
+  serverHeaders?: Record<string, string>
+) =>
   fetchApi<CandidateListResponse>(
-    `${API_ENDPOINTS.PART_LEADER.CANDIDATES}?part=${part}`
+    `${API_ENDPOINTS.PART_LEADER.CANDIDATES}?part=${part}`,
+    {},
+    serverHeaders
   );
 
 export const getCandidateDetail = (userId: number) =>
