@@ -1,7 +1,7 @@
-import { ApiResponse } from './common';
+import { ApiResponse, ApiResponseWrapper } from './common';
 
 export type Part = 'BACKEND' | 'FRONTEND';
-export type Team = 'ConX' | 'Ditda' | 'Groupeat' | 'IPX' | 'Jobdri';
+export type Team = 'CONX' | 'DITDA' | 'GROUPEAT' | 'IPX' | 'JOBDRI';
 
 export interface UserSummary {
   id: number;
@@ -28,5 +28,5 @@ export interface SignupRequest {
   inviteCode: string;
 }
 
-export type SignupResponse = ApiResponse;
+export type SignupResponse = ApiResponseWrapper<string>;
 export type LogoutResponse = ApiResponse;
