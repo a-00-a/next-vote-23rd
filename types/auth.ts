@@ -15,9 +15,7 @@ export interface LoginRequest {
   password: string;
 }
 
-export interface LoginResponse {
-  user: UserSummary;
-}
+export type LoginResponse = ApiResponseWrapper<{ user: UserSummary }>;
 
 export interface SignupRequest {
   name: string;
