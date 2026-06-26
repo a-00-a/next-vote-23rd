@@ -4,6 +4,7 @@ export type Part = 'BACKEND' | 'FRONTEND';
 export type Team = 'ConX' | 'Ditda' | 'Groupeat' | 'IPX' | 'Jobdri';
 
 export interface UserSummary {
+  id: number;
   name: string;
   part: Part;
   team: Team;
