@@ -42,10 +42,13 @@ export interface Candidate {
 export type CandidateListResponse = ApiResponseWrapper<Candidate[]>;
 
 export interface CandidateDetail {
-  userId: number;
+  candidateId: number;
   name: string;
   part: Part;
-  teamName: Team;
-  profileImageUrl: string | null;
-  introduction: string;
+  partName: string;
+  affiliation: string;
+  imageUrl: string | null;
+  description: string;
 }
+
+export type CandidateDetailResponse = ApiResponseWrapper<CandidateDetail>;
