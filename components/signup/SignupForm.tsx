@@ -197,7 +197,7 @@ export default function SignupForm() {
             {error && <p className="text-red-500 text-sm">{error}</p>}
             <button
               type="submit"
-              className="w-full py-4 mt-6 bg-primary text-white text-lg font-bold rounded-xl hover:bg-blue-800 hover:-translate-y-0.5 transition-all duration-300 shadow-md hover:shadow-lg disabled:bg-gray-400 disabled:transform-none disabled:shadow-none"
+              className="w-full py-4 mt-6 bg-primary text-white text-lg font-bold rounded-xl hover:bg-blue-800 hover:-translate-y-0.5 transition-all duration-300 shadow-md hover:shadow-lg disabled:bg-gray-400 disabled:transform-none disabled:shadow-none cursor-pointer"
             >
               회원가입
             </button>
