@@ -8,7 +8,7 @@ import { Eye, EyeOff } from 'lucide-react';
 import { signup } from '@/lib/api/auth';
 
 const TEAM_LABELS: Record<Team, string> = {
-  CONX: 'ConX',
+  CONX: 'CONX',
   DITDA: 'Ditda',
   GROUPEAT: 'Groupeat',
   IPX: 'IPX',
