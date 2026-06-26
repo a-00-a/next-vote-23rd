@@ -1,19 +1,42 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { Eye, EyeOff } from 'lucide-react';
+import { ApiError } from '@/lib/fetch';
+import { useAuthStore } from '@/store/authStore';
+import { login } from '@/lib/api/auth';
 
 export default function LoginForm() {
+  const router = useRouter();
+  const { setUser } = useAuthStore();
   const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    const loginId = formData.get('loginId');
-    const password = formData.get('password');
+    const loginId = formData.get('loginId') as string;
+    const password = formData.get('password') as string;
 
-    console.log({ loginId, password });
+    setIsLoading(true);
+    setError(null);
+
+    try {
+      const data = await login({ loginId, password });
+      setUser(data.result.user);
+      router.push('/demoday');
+    } catch (err) {
+      const error = err as ApiError;
+      if (error.status === 401) {
+        setError('아이디 또는 비밀번호가 틀렸습니다.');
+      } else {
+        setError(error.message ?? '로그인에 실패했습니다.');
+      }
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -42,9 +65,10 @@ export default function LoginForm() {
       {error && <p className="text-red-500 text-sm">{error}</p>}
       <button
         type="submit"
+        disabled={isLoading}
         className="cursor-pointer w-full h-12 mt-2 bg-primary text-white font-semibold rounded-lg hover:opacity-90 disabled:bg-gray-400 transition-all"
       >
-        로그인
+        {isLoading ? '로그인 중...' : '로그인'}
       </button>
     </form>
   );

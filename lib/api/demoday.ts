@@ -5,6 +5,7 @@ import {
   DemodayVoteResponse,
   DemodayLiveStatusResponse,
   DemodayResultResponse,
+  DemodayTeamListResponse,
 } from '@/types/demoday';
 
 export const getDemodayLiveStatus = () =>
@@ -18,3 +19,6 @@ export const voteForDemoday = (body: DemodayVoteRequest) =>
 
 export const getDemodayResult = () =>
   fetchApi<DemodayResultResponse>(API_ENDPOINTS.DEMODAY.RESULT);
+
+export const getDemodayTeams = () =>
+  fetchApi<DemodayTeamListResponse>(API_ENDPOINTS.DEMODAY.TEAMS);

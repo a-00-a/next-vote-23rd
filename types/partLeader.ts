@@ -1,44 +1,48 @@
-import { Part, Team } from './auth';
-import { ApiResponse, VotingProgress } from './common';
-
-export interface Candidate {
-  userId: number;
-  name: string;
-  teamName: Team;
-  profileThumbnailUrl: string | null;
-}
-
-export interface CandidateListResponse {
-  part: Part;
-  votingProgress: VotingProgress;
-  candidates: Candidate[];
-}
+import { Part } from './auth';
+import { ApiResponseWrapper } from './common';
 
 export interface PartLeaderVoteRequest {
   candidateId: number;
-  part: Part;
 }
 
-export type PartLeaderVoteResponse = ApiResponse;
+export interface PartLeaderVoteResult {
+  voteId: number;
+  candidateId: number;
+  candidateName: string;
+}
 
-export interface CandidateDetail {
-  userId: number;
+export type PartLeaderVoteResponse = ApiResponseWrapper<PartLeaderVoteResult>;
+
+export interface PartLeaderResultCandidate {
+  candidateId: number;
+  name: string;
+  affiliation: string;
+  imageUrl: string | null;
+  voteCount: number;
+}
+
+export interface PartLeaderResultResult {
+  part: Part;
+  partName: string;
+  candidates: PartLeaderResultCandidate[];
+}
+
+export type PartLeaderResultResponse =
+  ApiResponseWrapper<PartLeaderResultResult>;
+
+export interface Candidate {
+  candidateId: number;
   name: string;
   part: Part;
-  teamName: Team;
-  profileImageUrl: string | null;
-  introduction: string;
+  partName: string;
+  affiliation: string;
+  imageUrl: string | null;
 }
 
-export interface PartLeaderResultResponse {
-  part: Part;
-  votingProgress: VotingProgress;
-  voteResult: {
-    ranking: number;
-    candidateId: number;
-    name: string;
-    profileImageUrl: string | null;
-    voteCount: number;
-    isWinner: boolean;
-  }[];
+export type CandidateListResponse = ApiResponseWrapper<Candidate[]>;
+
+export interface CandidateDetail extends Candidate {
+  description: string;
 }
+
+export type CandidateDetailResponse = ApiResponseWrapper<CandidateDetail>;

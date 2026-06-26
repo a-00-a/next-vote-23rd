@@ -1,34 +1,57 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { ApiError } from '@/lib/fetch';
 import { Team, Part } from '@/types/auth';
 import { Eye, EyeOff } from 'lucide-react';
+import { signup } from '@/lib/api/auth';
+
+const TEAM_LABELS: Record<Team, string> = {
+  CONX: 'ConX',
+  DITDA: 'Ditda',
+  GROUPEAT: 'Groupeat',
+  IPX: 'IPX',
+  JOBDRI: 'Jobdri',
+};
 
 export default function SignupForm() {
+  const router = useRouter();
   const [part, setPart] = useState<Part>('FRONTEND');
-  const [team, setTeam] = useState<Team>('ConX');
+  const [team, setTeam] = useState<Team>('CONX');
   const [error, setError] = useState<string | null>(null);
   const [passwordError, setPasswordError] = useState<string | null>(null);
-
+  const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    const name = formData.get('name');
-    const loginId = formData.get('loginId');
-    const password = formData.get('password');
-    const confirmPassword = formData.get('confirmPassword');
-    const inviteCode = formData.get('inviteCode');
+    const name = formData.get('name') as string;
+    const loginId = formData.get('loginId') as string;
+    const password = formData.get('password') as string;
+    const confirmPassword = formData.get('confirmPassword') as string;
+    const inviteCode = formData.get('inviteCode') as string;
 
     if (password !== confirmPassword) {
       setPasswordError('비밀번호가 일치하지 않습니다.');
       return;
     }
+    setIsLoading(true);
+    setError(null);
 
-    // TODO: 회원가입 API 연동
-    console.log({ part, team, name, loginId, password, inviteCode });
+    try {
+      await signup({ name, loginId, password, team, part, inviteCode });
+      router.push('/login');
+    } catch (err) {
+      const error = err as ApiError;
+      if (error.status === 500) {
+        setError('초대 코드가 올바르지 않습니다.');
+      } else setError(error.message ?? '회원가입에 실패했습니다.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -89,10 +112,10 @@ export default function SignupForm() {
                 onChange={(e) => setTeam(e.target.value as Team)}
                 className="w-full px-5 py-4 bg-gray-50 border border-gray-200 rounded-xl text-gray-800 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
               >
-                {(['ConX', 'Ditda', 'Groupeat', 'IPX', 'Jobdri'] as Team[]).map(
+                {(['CONX', 'DITDA', 'GROUPEAT', 'IPX', 'JOBDRI'] as Team[]).map(
                   (t) => (
                     <option key={t} value={t}>
-                      {t}
+                      {TEAM_LABELS[t]}
                     </option>
                   )
                 )}
