@@ -2,21 +2,20 @@ export const COOKIE_NAME = {
   ACCESS_TOKEN: 'accessToken',
 } as const;
 
-// API 엔드포인트 (BE 확정 후 수정 필요)
 export const API_ENDPOINTS = {
   AUTH: {
-    LOGIN: '/auth/login',
-    SIGNUP: '/auth/signup',
-    LOGOUT: '/auth/logout',
+    LOGIN: '/login',
+    SIGNUP: '/signup',
+    LOGOUT: '/logout', // 추후 확정 필요
   },
   DEMODAY: {
-    LIVE_STATUS: '/demoday/vote/progress',
-    VOTE: '/demoday/vote',
-    RESULT: '/demoday/vote/result',
+    VOTE: '/api/v1/votes/demoday',
+    LIVE_STATUS: '/api/v1/votes/demoday/status',
+    RESULT: '/api/v1/votes/demoday/results',
   },
   PART_LEADER: {
-    CANDIDATES: '/vote/part-leader/candidates',
-    VOTE: '/vote/part-leader',
-    RESULT: '/vote/part-leader/result',
+    CANDIDATES: '/api/v1/votes/part-leader/candidates', // 목록 + 상세 둘 다 사용
+    VOTE: '/api/v1/votes/part-leader',
+    RESULT: '/api/v1/votes/part-leader/results',
   },
 } as const;
