@@ -1,5 +1,5 @@
 import { Part, Team } from './auth';
-import { ApiResponse, VotingProgress } from './common';
+import { ApiResponseWrapper } from './common';
 
 export interface Candidate {
   userId: number;
@@ -10,16 +10,15 @@ export interface Candidate {
 
 export interface CandidateListResponse {
   part: Part;
-  votingProgress: VotingProgress;
+  //votingProgress: VotingProgress;
   candidates: Candidate[];
 }
 
 export interface PartLeaderVoteRequest {
   candidateId: number;
-  part: Part;
 }
 
-export type PartLeaderVoteResponse = ApiResponse;
+export type PartLeaderVoteResponse = ApiResponseWrapper<null>;
 
 export interface CandidateDetail {
   userId: number;
@@ -32,7 +31,7 @@ export interface CandidateDetail {
 
 export interface PartLeaderResultResponse {
   part: Part;
-  votingProgress: VotingProgress;
+  //votingProgress: VotingProgress;
   voteResult: {
     ranking: number;
     candidateId: number;
