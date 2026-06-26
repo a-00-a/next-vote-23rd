@@ -34,4 +34,14 @@ export interface DemodayLiveStatusResult {
 export type DemodayLiveStatusResponse =
   ApiResponseWrapper<DemodayLiveStatusResult>;
 
-export type DemodayResultResponse = ApiResponseWrapper<null>;
+export interface DemodayResultResult {
+  totalVoterCount: number;
+  votedCount: number;
+  teams: {
+    team: Team;
+    teamName: string;
+    voteCount: number;
+  }[];
+}
+
+export type DemodayResultResponse = ApiResponseWrapper<DemodayResultResult>;
