@@ -1,12 +1,17 @@
+import { cookies } from 'next/headers';
 import Link from 'next/link';
 import PartLeaderVoteForm from '@/components/vote/part-leader/PartLeaderVoteForm';
-
 import { getCandidates } from '@/lib/api/partLeader';
 
 export default async function PartLeaderVote() {
-  const response = await getCandidates('FRONTEND');
-  
-  const candidates = response.isSuccess ? response.result : [];
+  const cookieStore = await cookies();
+  const token = cookieStore.get('accessToken')?.value;
+  const serverHeaders: Record<string, string> = token
+    ? { Cookie: `accessToken=${token}` }
+    : {};
+
+  const response = await getCandidates('FRONTEND', serverHeaders);
+  const candidates = response.isSuccess ? (response.result ?? []) : [];
 
   return (
     <div className="flex flex-col items-center w-full min-h-screen py-16 bg-gray-50 px-4 gap-12">
