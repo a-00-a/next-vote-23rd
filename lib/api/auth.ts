@@ -10,7 +10,7 @@ import {
 } from '@/types/auth';
 
 export const login = (body: LoginRequest) =>
-  fetchApi<ApiResponseWrapper<LoginResponse>>(API_ENDPOINTS.AUTH.LOGIN, {
+  fetchApi<LoginResponse>(API_ENDPOINTS.AUTH.LOGIN, {
     method: 'POST',
     body: JSON.stringify(body),
   });
