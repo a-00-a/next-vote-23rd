@@ -1,5 +1,5 @@
 import { Team } from './auth';
-import { ApiResponseWrapper, VotingProgress } from './common';
+import { ApiResponseWrapper } from './common';
 
 export interface DemodayVoteRequest {
   team: Team;
@@ -7,16 +7,22 @@ export interface DemodayVoteRequest {
 
 export type DemodayVoteResponse = ApiResponseWrapper<null>;
 
-export interface DemodayLiveStatusResponse {
-  votingProgress: VotingProgress;
-  voteResult: {
-    teamName: Team;
+export interface DemodayLiveStatusResult {
+  totalVoterCount: number;
+  votedCount: number;
+  resultOpen: boolean;
+  teams: {
+    team: Team;
+    teamName: string; // 화면 표시용
     voteCount: number;
   }[];
 }
 
+export type DemodayLiveStatusResponse =
+  ApiResponseWrapper<DemodayLiveStatusResult>;
+
 export interface DemodayResultResponse {
-  votingProgress: VotingProgress & {
+  votingProgress: {
     detail: {
       backendTotal: number;
       backendVoted: number;
