@@ -31,17 +31,15 @@ export type PartLeaderResultResponse =
   ApiResponseWrapper<PartLeaderResultResult>;
 
 export interface Candidate {
-  userId: number;
+  candidateId: number;
   name: string;
-  teamName: Team;
-  profileThumbnailUrl: string | null;
+  part: Part;
+  partName: string;
+  affiliation: string;
+  imageUrl: string | null;
 }
 
-export interface CandidateListResponse {
-  part: Part;
-  //votingProgress: VotingProgress;
-  candidates: Candidate[];
-}
+export type CandidateListResponse = ApiResponseWrapper<Candidate[]>;
 
 export interface CandidateDetail {
   userId: number;
@@ -51,4 +49,3 @@ export interface CandidateDetail {
   profileImageUrl: string | null;
   introduction: string;
 }
-
