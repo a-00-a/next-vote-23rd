@@ -20,15 +20,17 @@ export interface DemodayTeam {
 
 export type DemodayTeamListResponse = ApiResponseWrapper<DemodayTeam[]>;
 
+export interface DemodayTeamResult {
+  team: Team;
+  teamName: string; // 화면 표시용
+  voteCount: number;
+}
+
 export interface DemodayLiveStatusResult {
   totalVoterCount: number;
   votedCount: number;
   resultOpen: boolean;
-  teams: {
-    team: Team;
-    teamName: string; // 화면 표시용
-    voteCount: number;
-  }[];
+  teams: DemodayTeamResult[];
 }
 
 export type DemodayLiveStatusResponse =
@@ -37,11 +39,7 @@ export type DemodayLiveStatusResponse =
 export interface DemodayResultResult {
   totalVoterCount: number;
   votedCount: number;
-  teams: {
-    team: Team;
-    teamName: string;
-    voteCount: number;
-  }[];
+  teams: DemodayTeamResult[];
 }
 
 export type DemodayResultResponse = ApiResponseWrapper<DemodayResultResult>;
