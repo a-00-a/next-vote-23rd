@@ -7,7 +7,6 @@ import Logo from '@/public/logo-ceos.svg';
 import NavItem from './NavItem';
 
 import { useAuthStore } from '@/store/authStore';
-import { UserSummary } from '@/types/auth';
 
 const NAV_ITEMS = [
   { label: '파트장 투표', href: '/part-leader' },
