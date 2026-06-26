@@ -4,9 +4,9 @@ export interface ApiResponse {
   message: string;
 }
 
-// 사용: 데모데이, 파트장 투표 현황/결과
-export interface VotingProgress {
-  totalParticipantCount: number;
-  currentVotedCount: number;
-  isVoteCompleted: boolean;
+export interface ApiResponseWrapper<T> {
+  isSuccess: boolean;
+  code: string;
+  message: string;
+  result: T;
 }

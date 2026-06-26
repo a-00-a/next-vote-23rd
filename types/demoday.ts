@@ -1,33 +1,45 @@
 import { Team } from './auth';
-import { ApiResponse, VotingProgress } from './common';
+import { ApiResponseWrapper } from './common';
 
 export interface DemodayVoteRequest {
-  teamName: Team;
+  team: Team;
 }
 
-export type DemodayVoteResponse = ApiResponse;
-
-export interface DemodayLiveStatusResponse {
-  votingProgress: VotingProgress;
-  voteResult: {
-    teamName: Team;
-    voteCount: number;
-  }[];
+export interface DemodayVoteResult {
+  voteId: number;
+  selectedTeam: Team;
+  selectedTeamName: string;
 }
 
-export interface DemodayResultResponse {
-  votingProgress: VotingProgress & {
-    detail: {
-      backendTotal: number;
-      backendVoted: number;
-      frontendTotal: number;
-      frontendVoted: number;
-    };
-  };
-  voteResult: {
-    ranking: number;
-    teamName: Team;
-    voteCount: number;
-    isWinner: boolean;
-  }[];
+export type DemodayVoteResponse = ApiResponseWrapper<DemodayVoteResult>;
+
+export interface DemodayTeam {
+  team: Team;
+  teamName: string;
 }
+
+export type DemodayTeamListResponse = ApiResponseWrapper<DemodayTeam[]>;
+
+export interface DemodayTeamResult {
+  team: Team;
+  teamName: string; // 화면 표시용
+  voteCount: number;
+}
+
+export interface DemodayLiveStatusResult {
+  totalVoterCount: number;
+  votedCount: number;
+  resultOpen: boolean;
+  teams: DemodayTeamResult[];
+}
+
+export type DemodayLiveStatusResponse =
+  ApiResponseWrapper<DemodayLiveStatusResult>;
+
+export interface DemodayResultResult {
+  totalVoterCount: number;
+  votedCount: number;
+  teams: DemodayTeamResult[];
+}
+
+export type DemodayResultResponse = ApiResponseWrapper<DemodayResultResult>;

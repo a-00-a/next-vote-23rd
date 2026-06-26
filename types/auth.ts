@@ -1,9 +1,10 @@
-import { ApiResponse } from './common';
+import { ApiResponseWrapper } from './common';
 
 export type Part = 'BACKEND' | 'FRONTEND';
-export type Team = 'ConX' | 'Ditda' | 'Groupeat' | 'IPX' | 'Jobdri';
+export type Team = 'CONX' | 'DITDA' | 'GROUPEAT' | 'IPX' | 'JOBDRI';
 
 export interface UserSummary {
+  id: number;
   name: string;
   part: Part;
   team: Team;
@@ -14,9 +15,7 @@ export interface LoginRequest {
   password: string;
 }
 
-export interface LoginResponse {
-  user: UserSummary;
-}
+export type LoginResponse = ApiResponseWrapper<{ user: UserSummary }>;
 
 export interface SignupRequest {
   name: string;
@@ -27,5 +26,5 @@ export interface SignupRequest {
   inviteCode: string;
 }
 
-export type SignupResponse = ApiResponse;
-export type LogoutResponse = ApiResponse;
+export type SignupResponse = ApiResponseWrapper<null>;
+export type LogoutResponse = ApiResponseWrapper<null>;
