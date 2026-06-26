@@ -18,7 +18,13 @@ export interface PartLeaderVoteRequest {
   candidateId: number;
 }
 
-export type PartLeaderVoteResponse = ApiResponseWrapper<null>;
+export interface PartLeaderVoteResult {
+  voteId: number;
+  candidateId: number;
+  candidateName: string;
+}
+
+export type PartLeaderVoteResponse = ApiResponseWrapper<PartLeaderVoteResult>;
 
 export interface CandidateDetail {
   userId: number;
