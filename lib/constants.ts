@@ -4,7 +4,7 @@ export const COOKIE_NAME = {
 
 export const API_ENDPOINTS = {
   AUTH: {
-    LOGIN: '/login',
+    LOGIN: '/api/auth/login',
     SIGNUP: '/signup',
     LOGOUT: '/logout',
   },
