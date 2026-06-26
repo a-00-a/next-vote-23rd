@@ -2,12 +2,15 @@
 
 import { useState } from 'react';
 import { Team, Part } from '@/types/auth';
+import { Eye, EyeOff } from 'lucide-react';
 
 export default function SignupForm() {
   const [part, setPart] = useState<Part>('FRONTEND');
   const [team, setTeam] = useState<Team>('ConX');
   const [error, setError] = useState<string | null>(null);
   const [passwordError, setPasswordError] = useState<string | null>(null);
+
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -107,13 +110,22 @@ export default function SignupForm() {
                 required
                 className="w-full px-5 py-4 bg-gray-50 border border-gray-200 rounded-xl placeholder:text-gray-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-gray-800"
               />
-              <input
-                name="password"
-                type="password"
-                placeholder="비밀번호"
-                required
-                className="w-full px-5 py-4 bg-gray-50 border border-gray-200 rounded-xl placeholder:text-gray-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-gray-800"
-              />
+              <div className="relative">
+                <input
+                  name="password"
+                  type={showPassword ? 'text' : 'password'}
+                  placeholder="비밀번호"
+                  required
+                  className="w-full px-5 py-4 bg-gray-50 border border-gray-200 rounded-xl placeholder:text-gray-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-gray-800"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                >
+                  {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                </button>
+              </div>
               <input
                 name="confirmPassword"
                 type="password"
