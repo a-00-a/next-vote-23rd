@@ -11,7 +11,7 @@ export const API_ENDPOINTS = {
   DEMODAY: {
     VOTE: '/proxy/votes/demoday',
     LIVE_STATUS: '/api/v1/votes/demoday/status',
-    RESULT: '/proxy/votes/demoday/results',
+    RESULT: '/api/v1/votes/demoday/results',
     TEAMS: '/api/v1/votes/demoday/teams',
   },
   PART_LEADER: {
