@@ -11,6 +11,7 @@ const PUBLIC_PATHS = ['/', '/login', '/signup'];
 
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
+  const token = request.cookies.get(COOKIE_NAME.ACCESS_TOKEN)?.value;
 
   const isPublic = PUBLIC_PATHS.some(
     (path) => pathname === path || pathname.startsWith(path + '/')
@@ -18,7 +19,6 @@ export async function proxy(request: NextRequest) {
 
   if (isPublic) {
     if (pathname === '/login' || pathname === '/signup') {
-      const token = request.cookies.get(COOKIE_NAME.ACCESS_TOKEN)?.value;
       if (token) {
         try {
           await jwtVerify(token, secret);
@@ -30,8 +30,6 @@ export async function proxy(request: NextRequest) {
     }
     return NextResponse.next();
   }
-
-  const token = request.cookies.get(COOKIE_NAME.ACCESS_TOKEN)?.value;
 
   if (!token) {
     return NextResponse.redirect(new URL('/login', request.url));
@@ -46,6 +44,5 @@ export async function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/((?!.*).*)'],
-  //matcher: ['/((?!api|_next|static|favicon.ico|logo-ceos.svg|assets).*)'],
+  matcher: ['/((?!api|proxy|_next|static|favicon.ico|logo-ceos.svg|assets).*)'],
 };
