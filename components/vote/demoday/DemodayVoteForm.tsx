@@ -40,11 +40,11 @@ export default function DemodayVoteForm({
       } else {
         alert(response.message || '투표 처리에 실패했습니다.');
       }
-    } catch (error) {
-      console.error('[Vote Error]:', error);
-      alert('네트워크 오류가 발생했습니다. 다시 시도해 주세요.');
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      alert(error.message || '오류가 발생했습니다. 다시 시도해 주세요.');
     } finally {
-      setIsSubmitting(false); // 로딩 상태 해제
+      setIsSubmitting(false);
     }
   };
 

@@ -36,6 +36,5 @@ export const getPartLeaderResult = (
 ) =>
   fetchApi<PartLeaderResultResponse>(
     `${API_ENDPOINTS.PART_LEADER.RESULT}?part=${part}`,
-    {},
-    serverHeaders
+    { headers: serverHeaders }
   );
