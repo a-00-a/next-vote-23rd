@@ -6,9 +6,6 @@ export async function POST(request: NextRequest) {
   const cookieStore = await cookies();
   const token = cookieStore.get('accessToken')?.value;
 
-  console.log('token:', token);
-  console.log('body:', body);
-
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/v1/votes/demoday`,
     {
@@ -21,9 +18,7 @@ export async function POST(request: NextRequest) {
     }
   );
 
-  console.log('res.status:', res.status);
   const data = await res.json();
-  console.log('data:', data);
 
   return NextResponse.json(data, { status: res.status });
 }
