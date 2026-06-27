@@ -84,7 +84,7 @@ export default function SignupForm() {
             <button
               type="button"
               onClick={() => setPart('FRONTEND')}
-              className={`flex-1 py-3 text-sm font-bold rounded-lg transition-all duration-300 ${
+              className={`flex-1 py-3 text-sm font-bold rounded-lg transition-all duration-300 cursor-pointer ${
                 part === 'FRONTEND'
                   ? 'bg-white text-primary shadow-sm'
                   : 'text-gray-500 hover:text-gray-700'
@@ -95,7 +95,7 @@ export default function SignupForm() {
             <button
               type="button"
               onClick={() => setPart('BACKEND')}
-              className={`flex-1 py-3 text-sm font-bold rounded-lg transition-all duration-300 ${
+              className={`flex-1 py-3 text-sm font-bold rounded-lg transition-all duration-300 cursor-pointer ${
                 part === 'BACKEND'
                   ? 'bg-white text-primary shadow-sm'
                   : 'text-gray-500 hover:text-gray-700'
@@ -110,7 +110,7 @@ export default function SignupForm() {
               <select
                 value={team}
                 onChange={(e) => setTeam(e.target.value as Team)}
-                className="w-full px-5 py-4 bg-gray-50 border border-gray-200 rounded-xl text-gray-800 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
+                className="w-full px-5 py-4 bg-gray-50 border border-gray-200 rounded-xl text-gray-800 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all cursor-pointer"
               >
                 {(['CONX', 'DITDA', 'GROUPEAT', 'IPX', 'JOBDRI'] as Team[]).map(
                   (t) => (
