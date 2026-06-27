@@ -37,7 +37,7 @@ export default async function DemodayVote() {
   // const liveStatus = statusRes.isSuccess ? statusRes.result : null;
 
   return (
-    <div className="w-full min-h-dvh bg-gray-50/50 flex justify-center items-center px-4 md:px-8">
+    <div className="w-full min-h-dvh bg-gray-50/50 flex justify-center items-center px-4 md:px-8 pt-12">
       <div className="w-full max-w-6xl flex flex-col lg:flex-row gap-10 lg:gap-16">
         <section className="flex-3 flex flex-col gap-8">
           <TypewriterText text="데모데이에서 가장 우수한 팀에게 투표해주세요!" />
