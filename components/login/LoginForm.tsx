@@ -25,13 +25,14 @@ export default function LoginForm() {
 
     try {
       const data = await login({ loginId, password });
-      console.log('data:', data);
       setUser(data.result.user);
       router.push('/demoday');
     } catch (err) {
       const error = err as ApiError;
       if (error.status === 401) {
         setError('아이디 또는 비밀번호가 틀렸습니다.');
+      } else if (error.status === 400) {
+        setError('입력 정보를 다시 확인해주세요.');
       } else {
         setError(error.message ?? '로그인에 실패했습니다.');
       }
