@@ -18,8 +18,6 @@ export async function fetchApi<T>(
     ? endpoint
     : `${BASE_URL}${endpoint}`;
 
-  console.log('fetch URL:', url);
-
   const res = await fetch(url, {
     ...options,
     credentials: 'include',

@@ -1,15 +1,16 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
 import { DemodayLiveStatusResult } from '@/types/demoday';
 
 interface LiveStatusProps {
   statusData: DemodayLiveStatusResult;
 }
 
-export default function DemodayLiveStatus({ statusData }: LiveStatusProps) {
-  const router = useRouter();
+export default function DemodayLiveStatus({
+  statusData: initialData,
+}: LiveStatusProps) {
+  const [statusData, setStatusData] = useState(initialData);
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -18,12 +19,18 @@ export default function DemodayLiveStatus({ statusData }: LiveStatusProps) {
   }, []);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      router.refresh();
+    const interval = setInterval(async () => {
+      try {
+        const res = await fetch('/proxy/votes/demoday/status');
+        const data = await res.json();
+        if (data.isSuccess) setStatusData(data.result);
+      } catch (err) {
+        console.error(err);
+      }
     }, 3000);
 
     return () => clearInterval(interval);
-  }, [router]);
+  }, []);
 
   const sortedTeams = [...statusData.teams].sort(
     (a, b) => b.voteCount - a.voteCount

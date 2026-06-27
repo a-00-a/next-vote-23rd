@@ -10,7 +10,6 @@ import { DemodayTeam, DemodayLiveStatusResult } from '@/types/demoday';
 export default async function DemodayVote() {
   const cookieStore = await cookies();
   const token = cookieStore.get('accessToken')?.value;
-  console.log('token:', token);
 
   const serverHeaders: Record<string, string> = token
     ? { Cookie: `accessToken=${token}` }
@@ -24,17 +23,12 @@ export default async function DemodayVote() {
       getDemodayTeams(serverHeaders),
       getDemodayLiveStatus(serverHeaders),
     ]);
-    console.log('teamsRes:', teamsRes);
-    console.log('statusRes:', statusRes);
 
     teamList = teamsRes.isSuccess ? teamsRes.result : [];
     liveStatus = statusRes.isSuccess ? statusRes.result : null;
   } catch (err) {
     console.error('API 에러:', err);
   }
-
-  // const teamList = teamsRes.isSuccess ? teamsRes.result : [];
-  // const liveStatus = statusRes.isSuccess ? statusRes.result : null;
 
   return (
     <div className="w-full min-h-dvh bg-gray-50/50 flex justify-center items-center px-4 md:px-8 pt-12">

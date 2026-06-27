@@ -28,11 +28,9 @@ export const getDemodayResult = (serverHeaders?: Record<string, string>) =>
     serverHeaders
   );
 
-export const getDemodayTeams = (serverHeaders?: Record<string, string>) => {
-  console.log('getDemodayTeams 호출', serverHeaders);
-  return fetchApi<DemodayTeamListResponse>(
+export const getDemodayTeams = (serverHeaders?: Record<string, string>) =>
+  fetchApi<DemodayTeamListResponse>(
     API_ENDPOINTS.DEMODAY.TEAMS,
     {},
     serverHeaders
   );
-};

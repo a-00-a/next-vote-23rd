@@ -46,9 +46,7 @@ export default function SignupForm() {
       router.push('/login');
     } catch (err) {
       const error = err as ApiError;
-      if (error.status === 500) {
-        setError('초대 코드가 올바르지 않습니다.');
-      } else setError(error.message ?? '회원가입에 실패했습니다.');
+      setError(error.message ?? '회원가입에 실패했습니다.');
     } finally {
       setIsLoading(false);
     }
@@ -197,9 +195,10 @@ export default function SignupForm() {
             {error && <p className="text-red-500 text-sm">{error}</p>}
             <button
               type="submit"
-              className="w-full py-4 mt-6 bg-primary text-white text-lg font-bold rounded-xl hover:bg-blue-800 hover:-translate-y-0.5 transition-all duration-300 shadow-md hover:shadow-lg disabled:bg-gray-400 disabled:transform-none disabled:shadow-none cursor-pointer"
+              disabled={isLoading}
+              className="w-full py-4 mt-6 bg-primary text-white text-lg font-bold rounded-xl disabled:bg-gray-400 hover:bg-blue-800 hover:-translate-y-0.5 transition-all duration-300 shadow-md hover:shadow-lg disabled:bg-gray-400 disabled:transform-none disabled:shadow-none cursor-pointer"
             >
-              회원가입
+              {isLoading ? '회원가입 중...' : '회원가입'}
             </button>
           </form>
         </div>

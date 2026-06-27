@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { Candidate, PartLeaderVoteRequest } from '@/types/partLeader';
 import { voteForPartLeader } from '@/lib/api/partLeader';
 import { getThumbnailUrl } from '@/lib/utils/avatar';
+import CandidateModal from './CandidateModal';
 
 interface PartLeaderVoteFormProps {
   initialCandidates: Candidate[];
@@ -18,6 +19,7 @@ export default function PartLeaderVoteForm({
 
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [selectedModalId, setSelectedModalId] = useState<number | null>(null);
 
   const handleMemberSelect = (id: number) => {
     setSelectedId(id);
@@ -77,13 +79,7 @@ export default function PartLeaderVoteForm({
                 className="absolute top-3 right-3 p-1 text-gray-300 hover:text-primary transition-colors"
                 onClick={(e) => {
                   e.stopPropagation();
-
-                  {
-                    /* TODO: 동료 작업 영역 - getCandidateDetail(candidate.candidateId) 호출 및 모달 오픈 로직 작성 */
-                  }
-                  console.log(
-                    `모달 오픈 준비: ${candidate.candidateId}번 후보`
-                  );
+                  setSelectedModalId(candidate.candidateId);
                 }}
                 aria-label="상세 정보 보기"
               >
@@ -134,6 +130,11 @@ export default function PartLeaderVoteForm({
       >
         {isSubmitting ? '처리 중...' : '투표 완료'}
       </button>
+
+      <CandidateModal
+        candidateId={selectedModalId}
+        onClose={() => setSelectedModalId(null)}
+      />
     </div>
   );
 }
