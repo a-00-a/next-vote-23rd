@@ -5,8 +5,8 @@ import {
   PartLeaderVoteRequest,
   PartLeaderVoteResponse,
   CandidateListResponse,
-  CandidateDetail,
   PartLeaderResultResponse,
+  CandidateDetailResponse,
 } from '@/types/partLeader';
 
 export const getCandidates = (
@@ -19,9 +19,9 @@ export const getCandidates = (
     serverHeaders
   );
 
-export const getCandidateDetail = (userId: number) =>
-  fetchApi<CandidateDetail>(
-    `${API_ENDPOINTS.PART_LEADER.CANDIDATES}/${userId}`
+export const getCandidateDetail = (candidateId: number) =>
+  fetchApi<CandidateDetailResponse>(
+    `${API_ENDPOINTS.PART_LEADER.CANDIDATE_DETAIL}/${candidateId}`
   );
 
 export const voteForPartLeader = (body: PartLeaderVoteRequest) =>
