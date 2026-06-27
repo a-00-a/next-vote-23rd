@@ -11,13 +11,21 @@ export interface ApiError {
 
 export async function fetchApi<T>(
   endpoint: string,
-  options: RequestInit = {}
+  options: RequestInit = {},
+  serverHeaders?: Record<string, string>
 ): Promise<T> {
-  const res = await fetch(`${BASE_URL}${endpoint}`, {
+  const url = endpoint.startsWith('/proxy/')
+    ? endpoint
+    : `${BASE_URL}${endpoint}`;
+
+  console.log('fetch URL:', url);
+
+  const res = await fetch(url, {
     ...options,
     credentials: 'include',
     headers: {
       'Content-Type': 'application/json',
+      ...serverHeaders,
       ...options.headers,
     },
   }).catch(() => {
@@ -32,7 +40,9 @@ export async function fetchApi<T>(
       case 400:
         throw { status: 400, message: error.message ?? '잘못된 요청입니다.' };
       case 401:
-        window.location.href = '/login';
+        if (typeof window !== 'undefined') {
+          window.location.href = '/login';
+        }
         throw { status: 401, message: '로그인이 필요합니다.' };
       case 403:
         throw {

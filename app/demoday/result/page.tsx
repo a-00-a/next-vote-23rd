@@ -1,7 +1,14 @@
+import { cookies } from 'next/headers';
 import { getDemodayResult } from '@/lib/api/demoday';
 
 export default async function DemodayResult() {
-  const response = await getDemodayResult();
+  const cookieStore = await cookies();
+  const token = cookieStore.get('accessToken')?.value;
+  const serverHeaders: Record<string, string> = token
+    ? { Cookie: `accessToken=${token}` }
+    : {};
+
+  const response = await getDemodayResult(serverHeaders);
 
   if (!response.isSuccess && response.code === 'VOTE4031') {
     return (

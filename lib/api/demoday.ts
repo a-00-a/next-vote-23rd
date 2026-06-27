@@ -8,8 +8,12 @@ import {
   DemodayTeamListResponse,
 } from '@/types/demoday';
 
-export const getDemodayLiveStatus = () =>
-  fetchApi<DemodayLiveStatusResponse>(API_ENDPOINTS.DEMODAY.LIVE_STATUS);
+export const getDemodayLiveStatus = (serverHeaders?: Record<string, string>) =>
+  fetchApi<DemodayLiveStatusResponse>(
+    API_ENDPOINTS.DEMODAY.LIVE_STATUS,
+    {},
+    serverHeaders
+  );
 
 export const voteForDemoday = (body: DemodayVoteRequest) =>
   fetchApi<DemodayVoteResponse>(API_ENDPOINTS.DEMODAY.VOTE, {
@@ -17,8 +21,18 @@ export const voteForDemoday = (body: DemodayVoteRequest) =>
     body: JSON.stringify(body),
   });
 
-export const getDemodayResult = () =>
-  fetchApi<DemodayResultResponse>(API_ENDPOINTS.DEMODAY.RESULT);
+export const getDemodayResult = (serverHeaders?: Record<string, string>) =>
+  fetchApi<DemodayResultResponse>(
+    API_ENDPOINTS.DEMODAY.RESULT,
+    {},
+    serverHeaders
+  );
 
-export const getDemodayTeams = () =>
-  fetchApi<DemodayTeamListResponse>(API_ENDPOINTS.DEMODAY.TEAMS);
+export const getDemodayTeams = (serverHeaders?: Record<string, string>) => {
+  console.log('getDemodayTeams 호출', serverHeaders);
+  return fetchApi<DemodayTeamListResponse>(
+    API_ENDPOINTS.DEMODAY.TEAMS,
+    {},
+    serverHeaders
+  );
+};

@@ -25,6 +25,7 @@ export default function LoginForm() {
 
     try {
       const data = await login({ loginId, password });
+      console.log('data:', data);
       setUser(data.result.user);
       router.push('/demoday');
     } catch (err) {

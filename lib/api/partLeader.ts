@@ -9,9 +9,14 @@ import {
   PartLeaderResultResponse,
 } from '@/types/partLeader';
 
-export const getCandidates = (part: Part) =>
+export const getCandidates = (
+  part: Part,
+  serverHeaders?: Record<string, string>
+) =>
   fetchApi<CandidateListResponse>(
-    `${API_ENDPOINTS.PART_LEADER.CANDIDATES}?part=${part}`
+    `${API_ENDPOINTS.PART_LEADER.CANDIDATES}?part=${part}`,
+    {},
+    serverHeaders
   );
 
 export const getCandidateDetail = (userId: number) =>
@@ -25,7 +30,12 @@ export const voteForPartLeader = (body: PartLeaderVoteRequest) =>
     body: JSON.stringify(body),
   });
 
-export const getPartLeaderResult = (part: Part) =>
+export const getPartLeaderResult = (
+  part: Part,
+  serverHeaders?: Record<string, string>
+) =>
   fetchApi<PartLeaderResultResponse>(
-    `${API_ENDPOINTS.PART_LEADER.RESULT}?part=${part}`
+    `${API_ENDPOINTS.PART_LEADER.RESULT}?part=${part}`,
+    {},
+    serverHeaders
   );
