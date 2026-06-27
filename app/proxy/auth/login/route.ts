@@ -12,14 +12,12 @@ export async function POST(request: NextRequest) {
   const data = await res.json();
 
   const setCookieHeader = res.headers.get('set-cookie');
-  console.log('setCookieHeader:', setCookieHeader);
-  console.log('data:', data);
 
   const response = NextResponse.json(data, { status: res.status });
 
   if (setCookieHeader) {
     const tokenMatch = setCookieHeader.match(/accessToken=([^;]+)/);
-    console.log('tokenMatch:', tokenMatch);
+
     if (tokenMatch) {
       response.cookies.set('accessToken', tokenMatch[1], {
         httpOnly: true,
