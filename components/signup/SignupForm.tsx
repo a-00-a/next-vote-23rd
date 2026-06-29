@@ -196,7 +196,7 @@ export default function SignupForm() {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full py-4 mt-6 bg-primary text-white text-lg font-bold rounded-xl disabled:bg-gray-400 hover:bg-blue-800 hover:-translate-y-0.5 transition-all duration-300 shadow-md hover:shadow-lg disabled:bg-gray-400 disabled:transform-none disabled:shadow-none cursor-pointer"
+              className="w-full py-4 mt-6 bg-primary text-white text-lg font-bold rounded-xl disabled:bg-gray-400 hover:bg-blue-800 hover:-translate-y-0.5 transition-all duration-300 shadow-md hover:shadow-lg disabled:transform-none disabled:shadow-none cursor-pointer"
             >
               {isLoading ? '회원가입 중...' : '회원가입'}
             </button>
