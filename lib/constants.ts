@@ -5,7 +5,7 @@ export const COOKIE_NAME = {
 export const API_ENDPOINTS = {
   AUTH: {
     LOGIN: '/proxy/auth/login',
-    SIGNUP: '/signup',
+    SIGNUP: '/proxy/auth/signup',
     LOGOUT: '/proxy/auth/logout',
   },
   DEMODAY: {
